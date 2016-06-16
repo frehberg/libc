@@ -36,6 +36,18 @@ s! {
         pub sun_path: [::c_char; 108]
     }
 
+    pub struct can_isotp { rx : ::uint32_t, tx: ::uint32_t, }
+
+    // this should be a c-type unsafe enum!!
+    pub struct can_addr { tp : can_isotp, }
+
+    pub struct sockaddr_can {
+        pub can_family: sa_family_t,
+        pub can_ifindex: ::uint32_t,
+        // should be union here
+        pub canaddr: can_addr, // isotp
+    }
+
     pub struct sockaddr_storage {
         pub ss_family: sa_family_t,
         __ss_align: ::size_t,
